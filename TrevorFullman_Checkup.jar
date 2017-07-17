@@ -1,0 +1,77 @@
+/*
+ * Trevor Fullman
+ */
+
+/*
+ * This is the method for the other class
+ */
+
+import java.text.DecimalFormat;
+
+
+public class TrevorFullman_Checkup {
+	
+	int patientNumber;
+	int newsystolic;
+	int newdiastolic;
+	int newldl;
+	int newhdl;
+	double ratio;
+
+
+
+
+public TrevorFullman_Checkup(){  //constructor that initializes patient number
+	patientNumber=3;
+}
+
+
+public void setSystolic(int systolic) {   //sets the systolic as a random numbers
+	newsystolic= 60+ (int) ((Math.random() * 100));
+}
+
+public int getSystolic() {   //grabs that random number
+	return newsystolic;
+}
+
+public void setDiastolic(int diastolic) {   //sets diastolic as random int
+	newdiastolic= 40+ (int) ((Math.random() * 80));
+}
+
+public int getDiastolic() {  //gets that random int
+	return newdiastolic;
+}
+
+public void setLdl(int ldl) {  //sets ldl
+	newldl = 100 + (int) ((Math.random() * 200));
+	
+}
+public int getLdl() {  //gets ldl
+	return newldl;
+}
+
+public void setHdl(int hdl) {   //sets hdl
+	newhdl = 30+ (int) ((Math.random() * 150));
+	
+}
+
+public int getHdl() {   //gets hdl
+	return newhdl;
+}
+
+public double computeRatio(double value, double value2) {   //compute ratio method to divide ldl/hdl
+	ratio = value2/value;
+	return ratio;
+}
+	 
+public String toString()    {       //tostring method that prints out when called
+	DecimalFormat fmt = new DecimalFormat("##.##");     
+	return ("patient number: " +patientNumber + "\n" + "systolic: " + newsystolic + "\n" + 
+	"diastolic: " +newdiastolic+ "\n" + "hdl: " +newhdl+ "\n" +"ldl: " +newldl+ "\n" + "ratio: " + fmt.format(ratio) +
+	"\n" + "Hdl is known as good cholesterol." +"\n" + "A 3.5 ratio or below is ideal.");
+
+}
+
+
+}
+

@@ -1,0 +1,340 @@
+/** Trevor Fullman
+    CSC220-02
+    Project_1 */
+    
+/** This game allows the user to control a ball with their mouse. The user has
+to move their ball around the canvas while trying to avoid the enemy balls. The
+user has three lives and is aiming to get the highest score, which is determined by 
+the count. */
+
+
+
+int x = 0;
+int y = 0;
+int count = 0;
+int count1;
+int count2;
+int count3;
+int finalscore;
+int h;
+int csize=600;
+int leftbound=15;   // initializing all variables
+int rightbound=585;
+int lives = 3;
+int enemyX =  int(random(25,575));
+int enemyY =  int(random(25,575));
+int enemyX2 = int(random(25,575));
+int enemyY2 = int(random(25,575));
+int enemyX3 = int(random(25,575));
+int enemyY3 = int(random(25,575));
+int enemyX4 = int(random(25,575));
+int enemyY4 = int(random(25,575));
+int inc = int(random(-7,-5));
+int inc2 = int(random(-7,-5));
+int inc3 = int(random(8,10));
+int inc4 = int(random(-10,-8));
+int inc5 = int(random(-13,-10));
+int inc6 = int(random(10,13));
+int inc7 = int(random(-9,-6));
+int inc8 = int(random(-9,-6));
+
+
+
+
+
+
+void setup() {
+  
+  println("Move the green ball around with your mouse avoiding all of the enemy balls." +
+  " Only press a key when you lose a life to restart your game. You have 3 lives.");
+  size(csize,csize);  // sets canvas size
+
+}
+
+
+  
+void draw() {
+ 
+  background(200,25,50);  // background color
+
+    if(lives==3) {   //if you have 3 lives left it runs the game function
+      game();
+      if(count>100) {    // delays initial showing of score to display instructions
+      println("score = " +count);
+      }
+    }
+ 
+    if(lives==2) {  // runs game function if you have 2 lives left
+      game();
+      println("score = " +count);
+    }
+
+    if(lives==1) {   // runs game function with one life
+      game();
+      println("score = " +count);
+    }
+
+    if(lives==0) {    // with no lives left, runs finalscore function
+      finalscore(); 
+    }
+
+}
+
+
+void game() {  // game function
+
+
+    fill(0,50,0);  // dark green is friendly color
+
+    if(count==0) {   // initial drawing of ellipse in middle of screen
+      ellipse(300,300,30,30);
+    }
+    
+    if(mouseX>leftbound && mouseX<rightbound && mouseY>leftbound && mouseY<rightbound) {   //draws ellipse at mouse coordinates if mouse is in boundaries
+      background(200,25,50);
+      ellipse(mouseX,mouseY,30,30);
+      count++;   // adds the count/score
+    }
+
+
+    if(count>0) {
+      
+      if(mouseX<=leftbound && mouseY<=leftbound) {   // when mouse is out of the boundaries the ball will not leave the sketch area
+        ellipse(leftbound,leftbound,30,30);
+      }
+      else if(mouseX>=rightbound && mouseY<=leftbound) {
+        ellipse(rightbound,leftbound,30,30);
+      }
+      else if(mouseX>=rightbound && mouseY>=rightbound) {
+        ellipse(rightbound,rightbound,30,30);
+      }
+      else if(mouseX<=leftbound && mouseY>=rightbound) {
+        ellipse(leftbound,rightbound,30,30);
+      }
+      else if (mouseX<=leftbound) {
+        ellipse(leftbound,mouseY,30,30);
+      }
+      else if (mouseY<=leftbound) {
+        ellipse(mouseX,leftbound,30,30);
+      }
+      else if (mouseX>=rightbound) {
+        ellipse(rightbound,mouseY,30,30);
+      }
+      else if (mouseY>=rightbound) {
+        ellipse(mouseX,rightbound,30,30);
+      }
+    }
+  
+    fill(0,0,255);  // fills enemy ball color
+    ellipse(enemyX,enemyY,50,50);  //enemy ball
+
+    if(enemyX<rightbound-10) {    // increases x value of enemy ball and makes it bounce
+     
+      enemyX=enemyX+inc;
+
+        if(enemyX>=rightbound-10 || enemyX<= leftbound+10) {
+          inc = inc*-1;
+          enemyX=enemyX+inc;
+        }
+    }
+
+    if(enemyY<rightbound-10) {   // increases y value of enemy ball and makes it bounce
+  
+      enemyY=enemyY+inc2;
+  
+        if(enemyY>=rightbound-10 || enemyY<= leftbound+10) {
+          inc2 = inc2*-1;
+          enemyY = enemyY+inc2;
+        }
+    }
+
+
+
+
+
+    if(count>=200) {    //if count/score reaches 200, another enemy ball is made
+      ellipse(enemyX2,enemyY2,50,50);
+  
+        if(enemyX2<rightbound-10) {   // increases x
+    
+          enemyX2 = enemyX2+inc3;
+    
+            if(enemyX2>=rightbound-10 || enemyX2<= leftbound+10) {     //makes it bounce off walls
+              inc3 = inc3*-1;
+              enemyX2 = enemyX2+inc3;
+            }
+
+        }
+  
+        if(enemyY2<rightbound-10) {   // increases y and makes it bounce
+  
+          enemyY2 = enemyY2+inc4;
+  
+            if(enemyY2>=rightbound-10 || enemyY2<= leftbound+10) {
+              inc4 = inc4*-1;
+              enemyY2 = enemyY2+inc4;
+            }
+        }
+    }
+
+    if(count>=400) {     // third enemy ball
+      ellipse(enemyX3,enemyY3,50,50);
+  
+        if(enemyX3<rightbound-10) {  // increases x
+    
+          enemyX3 = enemyX3+inc5;
+    
+            if(enemyX3>=rightbound-10 || enemyX3<= leftbound+10) {
+              inc5 = inc5*-1;
+              enemyX3 = enemyX3+inc5;
+            }
+        }
+  
+        if(enemyY3<rightbound-10) {  // increases y
+  
+          enemyY3 = enemyY3+inc6;
+  
+            if(enemyY3>=rightbound-10 || enemyY3<= leftbound+10) {
+              inc6 = inc6*-1;
+              enemyY3 = enemyY3+inc6;
+            }
+        }
+    }
+
+
+    if(count>=600) {    // fourth enemy ball
+      ellipse(enemyX4,enemyY4,50,50);
+  
+        if(enemyX4<rightbound-10) {   // increases x
+    
+          enemyX4 = enemyX4+inc7;
+    
+            if(enemyX4>=rightbound-10 || enemyX4<= leftbound+10) {
+              inc7 = inc7*-1;
+              enemyX4 = enemyX4+inc7;
+            }
+        }
+        
+        if(enemyY4<rightbound-10) {  // increases y
+  
+          enemyY4 = enemyY4+inc8;
+  
+            if(enemyY4>=rightbound-10 || enemyY4<= leftbound+10) {
+              inc8 = inc8*-1;
+              enemyY4 = enemyY4+inc8;
+            }
+        }
+    }
+
+
+    float d = dist(mouseX,mouseY,enemyX,enemyY);
+    float e = dist(mouseX,mouseY,enemyX2,enemyY2);   // distance variables to determine collisions
+    float f = dist(mouseX,mouseY,enemyX3,enemyY3);
+    float g = dist(mouseX,mouseY,enemyX4,enemyY4);
+
+
+    if (d<=40 && lives==3) {   // if the dist is less than the addition of the two radii(40)
+      count1 = count;          // initializes count1 for the final score addition
+      noLoop();                // breaks the draw function
+      println("You lost a life. Press a key to continue");
+    }
+
+    if (d<=40 && lives==2) {
+      count2 = count;       //initializes count2 for final score addition
+      noLoop();
+      println("You lost a life. Press a key to continue");
+    }
+
+    if (d<=40 && lives==1) { 
+      count3 = count;      // initializes count3 for the final score addition
+      noLoop();
+      println("You lost a life. Press a key to continue");
+    }
+
+
+
+    if(count>=200) {    // same process but if the second enemy ball is hit
+        if (e<=40 && lives==3) {
+           count1 = count;
+           noLoop();
+           println("You lost a life. Press a key to continue");
+        }
+        if (e<=40 && lives==2) {
+           count2 = count;
+           noLoop();
+           println("You lost a life. Press a key to continue");
+        }
+        if (e<=40 && lives==1) {
+           count3 = count;
+           noLoop();
+           println("You lost a life. Press a key to continue");
+        }
+    }
+
+
+    if(count>=400) {   // same process for third enemy ball collision
+        if (f<=40 && lives==3) {
+           count1 = count;
+           noLoop();
+           println("You lost a life. Press a key to continue");        }
+        if (f<=40 && lives==2) {
+           count2 = count;
+           noLoop();
+           println("You lost a life. Press a key to continue");        }
+        if (f<=40 && lives==1) {
+           count3 = count;
+           noLoop();
+           println("You lost a life. Press a key to continue");        }
+    }
+
+    if(count>=600) {   // same process for fourth enemy ball collision
+        if (g<=40 && lives==3) {
+           count1 = count;
+           noLoop();
+           println("You lost a life. Press a key to continue");
+        }
+        if (g<=40 && lives==2) {
+           count2 = count;
+           noLoop();
+           println("You lost a life. Press a key to continue");
+        }
+        if (g<=40 && lives==1) {
+           count3 = count;
+           noLoop();
+           println("You lost a life. Press a key to continue");
+        }
+    }
+}
+
+
+
+void resetEnemies(){
+     enemyX =  int(random(25,575));
+     enemyY =  int(random(25,575));
+     enemyX2 = int(random(25,575));   // initializes all variables again so new random ints are created for a new game
+     enemyY2 = int(random(25,575));
+     enemyX3 = int(random(25,575));
+     enemyY3 = int(random(25,575));
+     inc = int(random(-7,-3));
+     inc2 = int(random(-7,-3));
+     inc3 = int(random(8,10));
+     inc4 = int(random(-10,-8));
+     inc5 = int(random(-10,-7));
+     inc6 = int(random(7,10));
+     inc7 = int(random(-8,-6));
+     inc8 = int(random(-8,-6));
+}
+
+
+void keyPressed() {   // when a key is pressed the next game begins with losing a life
+  resetEnemies();    // calls resetenemies for new random ints
+  count = 0;        // resets count to 0
+  lives--;          // reduces lives
+  loop();
+}
+
+void finalscore() {  //final score function adds the scores of the three lives and displays it
+  finalscore = (count1+count2+count3);
+  println("GAME OVER. No more lives. Final Score = " +finalscore);
+  noLoop();
+}

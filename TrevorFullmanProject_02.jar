@@ -1,0 +1,188 @@
+
+
+/**
+ * Trevor Fullman
+ * CSC220-02
+ * Project2
+ */
+
+/**
+ * This program displays a random word and allows the user to choose whether to solve, switch letters, or quit.
+ * Once they solve it correctly, they are congratulated with the amount of steps it took them.
+ */
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+
+
+public class Unscramble {
+	
+	
+
+	public static void main(String[] args) throws IOException {
+		
+		int n = 0;
+		int x = 0;
+		int numcount = 0;
+		int stepcount = 0;  //variables
+		String word = null;
+		
+		java.io.File file = new java.io.File("words.txt");   //gets file  
+		Scanner scan = new Scanner(file);  //scans file 
+		Scanner in = new Scanner(System.in);   //scans keys
+		
+		n = (int) (1 + Math.random()*(10));   //random int
+			
+		
+		while(x<n) {
+			word = scan.nextLine();   //gets random word
+			x++;
+			
+		}
+
+		
+	
+		ArrayList<Character> letters = new ArrayList<Character>(word.length());  //creates an array list of the length of the word
+		for ( char c : word.toCharArray() ) {
+		   letters.add(c);     //adds the characters from the word to the array
+		}
+		Collections.shuffle(letters);    //shuffles letters in the arraylist
+		char[] shuffled = new char[letters.size()]; //an array the size of all the characters
+		for ( int i = 0; i < word.length(); i++ ) {  //loops and gets all of the shuffled characters
+		   shuffled[i] = letters.get(i);   //getting the shuffled characters
+		}
+		String shuffledWord = new String(shuffled);   //makes it a string
+		while(numcount<word.length()) {  //counter for displaying array numbers
+			System.out.print(numcount);
+			numcount++;
+			
+		}
+		System.out.println("");
+		System.out.println(shuffledWord);
+		
+
+		
+		
+		while(word.compareTo(shuffledWord)!=0) {  //main loop for the game
+			
+		
+			stepcount++;  //counts steps
+			
+			System.out.println("");
+			System.out.println("Enter 1 to swap letters.");
+			System.out.println("Enter 2 to solve.");
+			System.out.println("Enter 3 to quit.");
+			int firstInt = 0;
+			if(in.hasNextInt()) {
+			firstInt = in.nextInt();
+			}
+			else{
+				System.out.println("That input is invalid. Restart for a new game.");
+				break;
+			}
+			
+			if(firstInt==1) {  //swapping letters option
+			
+				System.out.println("Enter the indices separated by spaces");
+			
+				char[] c = shuffledWord.toCharArray();  //rewrites array
+			
+				int count = 1;
+				numcount = 0;
+			
+				int f = 0;  //variables for changing letters
+				int s = 0;
+			
+					if(count==1){
+						f = in.nextInt();
+						count++;
+					}
+					if(count==2) {
+						s = in.nextInt();
+					}
+			
+			
+					if(s<=word.length()-1 && f<=word.length()-1) {
+				
+			
+						char first = c[f];//exchanges letters
+						char second = c[s];
+						c[f]= second;
+						c[s]= first;
+			
+						while(numcount<word.length()) {
+							System.out.print(numcount);
+							numcount++;
+				
+						}	
+			
+						shuffledWord = new String(c);
+						System.out.println("");
+						System.out.println(shuffledWord);
+			
+		
+					}
+			
+					else {
+						System.out.println("The input is invalid.");
+				
+					}
+			
+			}
+		
+			else if(firstInt==2) {  //solve method
+				System.out.println("Enter your guess.");
+				System.out.println("");
+				String guess = in.nextLine();
+				String realGuess = in.nextLine();
+					if(realGuess.compareTo(word)==0) {  //checks if the words are equal
+						shuffledWord = realGuess;
+					}
+					else if(realGuess.compareTo(word)!=0) {  //if its incorrect
+						System.out.println("That is incorrect.");
+						System.out.println("");
+						int newcount = 0;
+						while(newcount<word.length()) {
+							System.out.print(newcount);
+							newcount++;
+						}
+						System.out.println("");
+						System.out.println(shuffledWord);
+				
+					}
+			}
+		
+			else if(firstInt==3){  //quitting option
+				System.out.println("You lose.");
+				System.out.println("The correct word is " +word);
+				System.exit(0);
+			}
+		
+			else{
+				System.out.println("That input is invalid");
+			}
+		
+		}
+		
+		if(word.compareTo(shuffledWord)==0) {
+			System.out.println("");
+			System.out.println("Congratulations! You've unscrambled the word in " +stepcount + " steps.");
+		}
+		
+		
+	}
+
+}
+	
+
+
+	
+
+
+
+
+
+

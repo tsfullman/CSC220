@@ -1,0 +1,43 @@
+
+/*
+ * Trevor Fullman
+ * CSC_220-02
+ * Lab_07
+ */
+
+/*
+ * This program runs the checkup method to set and get some integers and display them.
+ */
+
+public class TrevorFullman_TestCheckup {  
+
+	public static void main (String[] args) {   //control panel
+		
+		int num1, num2, num3, num4;
+		double ratio;
+		
+		TrevorFullman_Checkup checkup1 = new TrevorFullman_Checkup(); //new method
+		
+		checkup1.setHdl(1);    //setting and getting hdl
+		num1 = checkup1.getHdl();
+		//System.out.println(num1);
+	
+		checkup1.setLdl(1);   //setting and getting ldl
+		num2 = checkup1.getLdl();
+		//System.out.println(num2);
+		
+		checkup1.setSystolic(1);
+		num3 = checkup1.getSystolic();
+		
+		checkup1.setDiastolic(1);
+		num4 = checkup1.getDiastolic();
+		
+		ratio = (double) checkup1.computeRatio(num1, num2);   //sending numbers to compute ratio 
+		String out = checkup1.toString();   //using tostring method
+		System.out.println(out);   //printing out results
+		
+		
+		
+	}
+	
+}

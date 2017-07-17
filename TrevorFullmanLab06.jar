@@ -1,0 +1,156 @@
+
+/**
+ * Trevor Fullman
+ * Lab_06
+ * CSC220-02
+ */
+
+/**
+ * This program takes an input of multiple lines from the user and
+ * concatenates them before finding the first and last string of
+ * length 5 in lexicographic order
+ */
+
+import java.io.IOException;
+import java.util.Scanner; //imports
+
+
+
+public class Lab06 {
+
+	public static void main (String[] args) throws IOException {
+		
+		 
+		Scanner in = new Scanner(System.in);
+		String n = "";
+		int h = 0;
+		int z = 1;
+		String u = "";
+		String v = "";
+		String p = "";
+		String q = "";
+		int r = 0;
+		int k = 1;
+		
+		    while( in.hasNext()) {   //loop for concatenating lines
+
+		    	n = n.concat(in.nextLine());
+		    	
+		    }
+	
+			System.out.println(n);	
+			
+			if(n.length()<5) {  //if the length of the string is too small
+				System.out.println("  ERROR: INPUT IS LESS THAN 5 CHARACTERS LONG");
+			}
+			
+		
+			while(z<=n.length()-5 &&h<=n.length()-5) { //analyzes every string of length 5
+				u = n.substring(h,h+5);
+				v = n.substring(z,z+5);
+				u.compareTo(v);   //compares them lexicographically
+				if(u.compareTo(v)<0) {   //if u is bigger than v
+					z++;	  
+				}
+				if(u.compareTo(v)>=0) {   //if u is smaller than v
+					h++;
+				}
+			}
+			
+			if(u.compareTo(v)>0) {  //if the last u is smaller than the last v
+				
+				int number = 0;
+				h=0;
+				
+				while(h<=n.length()-5) {
+					u = n.substring(h,h+5);   //reloops to find the number of equal strings
+					u.compareTo(v);
+						if(u.compareTo(v)==0) {
+							number++;	
+						}
+					h++;
+				}
+				
+				System.out.println(v+ "\t" + number);  //prints
+				
+				
+			}
+			
+			if(u.compareTo(v)<0) {     // if final u is bigger than final v
+				
+				int number2 = 0;
+				z=0;
+				
+				while(z<=n.length()-5) {
+					v = n.substring(z,z+5);   //reloop to find number
+					v.compareTo(u);
+						if(v.compareTo(u)==0) {
+							number2++;	
+						}
+						z++;
+				}
+					
+				System.out.println(u+ "\t" + number2);
+		
+			}
+			
+
+			
+			while(r<=n.length()-5 && k<=n.length()-5) {   //searching for biggest string
+				p = n.substring(r,r+5);
+				q = n.substring(k,k+5);
+				p.compareTo(q);
+					if(p.compareTo(q)<0) {
+						r++;	
+					}
+					if(p.compareTo(q)>=0) {
+						k++;
+					}
+			}
+			
+			
+			
+			if(p.compareTo(q)>0) {   //q is biggest string
+					
+					int number3 = 0;
+					k=0;
+					
+					while(k<=n.length()-5) {  //similar process to above
+						q = n.substring(k,k+5);
+						p.compareTo(q);
+							if(p.compareTo(q)==0) {
+								number3++;	
+							}
+						k++;
+					}
+					
+					System.out.println(p+ "\t" + number3);
+					
+					
+				}
+				
+				if(p.compareTo(q)<0) {  //p is the biggest string
+					
+					int number4 = 0;
+					r=0;
+					
+					while(r<=n.length()-5) {
+						p = n.substring(r,r+5);
+						q.compareTo(p);
+							if(q.compareTo(p)==0) {
+								number4++;	
+							}
+						r++;
+						
+					}
+					
+						System.out.println(q + "\t" + number4);
+			
+				}
+			
+		}
+		
+	}
+	
+
+
